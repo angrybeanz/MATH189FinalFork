@@ -67,7 +67,10 @@ def clean_and_prepare_df(df):
             # Replace '%' and ',' then convert to float
             df[col] = df[col].str.replace('%', '').str.replace(',', '').str.replace('$','').str.replace(' ','').astype(float)
         # Perform mean imputation for all numeric columns
-        df[col] = df[col].fillna(df[col].mean())
+        if col == 'gdp_country':
+            df[col] = df[col].fillna(0)
+        else:
+            df[col] = df[col].fillna(df[col].mean())
     
     # Handle categorical columns
     
